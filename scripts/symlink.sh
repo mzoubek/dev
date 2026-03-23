@@ -31,4 +31,6 @@ if [ -d "$DOTFILES_DIR/.config" ]; then
     done
 fi
 
+sudo systemctl enable bluetooth.service
+
 echo "✅ All symlinks created!"
