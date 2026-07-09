@@ -1,7 +1,6 @@
 7zip
 base
 base-devel
-blueberry
 bluez
 bluez-utils
 brave-bin
@@ -19,11 +18,9 @@ dolphin
 dosfstools
 dotnet-sdk
 dunst
-durdraw
 efibootmgr
 fastfetch
 fd
-figma-linux
 ghostty
 git
 go
@@ -75,7 +72,6 @@ pipewire-pulse
 polkit-kde-agent
 postgresql
 postman-bin
-prestashop
 python-pip
 python311
 python312

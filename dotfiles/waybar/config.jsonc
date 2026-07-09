@@ -12,7 +12,7 @@
   ],
   "modules-center": [
     "hyprland/workspaces",
-	"mpd"
+    "mpd"
   ],
   "modules-right": [
     "hyprland/window",
@@ -197,7 +197,7 @@
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
     "on-click": "rofi-bluetooth",
   },
-  "pulseaudio": {
+  "wireplumber": {
     "format": "{icon}",
     "format-bluetooth": "󰂰",
     "format-muted": "",
@@ -218,20 +218,20 @@
     },
     "scroll-step": 5,
     "justify": "center",
-    "on-click": "amixer sset Master toggle",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-click-right": "pavucontrol",
     "tooltip-format": "{volume}%  {icon}",
-    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
-    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+    "on-scroll-up": "wpctl set-sink-volume @DEFAULT_SINK@ +5%",
+    "on-scroll-down": "wpctl set-sink-volume @DEFAULT_SINK@ -5%"
   },
-  "pulseaudio#mic": {
+  "wireplumber#mic": {
     "format": "{format_source}",
     "format-source": "",
     "format-source-muted": "",
     "tooltip-format": "{volume}% {format_source} ",
-    "on-click": "pactl set-source-mute 0 toggle",
-    "on-scroll-down": "pactl set-source-volume 0 -1%",
-    "on-scroll-up": "pactl set-source-volume 0 +1%"
+    "on-click": "wpctl set-source-mute 0 toggle",
+    "on-scroll-down": "wpctl set-source-volume 0 -1%",
+    "on-scroll-up": "wpctl set-source-volume 0 +1%"
   },
   "group/audio": {
     "orientation": "horizontal",
@@ -240,12 +240,12 @@
       "transition-left-to-right": false
     },
     "modules": [
-      "pulseaudio",
-      "pulseaudio#mic",
-      "pulseaudio/slider"
+      "wireplumber",
+      "wireplumber#mic",
+      "wireplumber/slider"
     ]
   },
-  "pulseaudio/slider": {
+  "wireplumber/slider": {
     "min": 0,
     "max": 140,
     "orientation": "horizontal"
@@ -325,10 +325,10 @@
     "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped <U+F001>",
     "interval": 2,
     "consume-icons": {
-      "on": "<U+F0C4> " 
+      "on": "<U+F0C4> "
     },
     "random-icons": {
-      "off": "<span color=\"#f53c3c\"><U+F074></span> ", 
+      "off": "<span color=\"#f53c3c\"><U+F074></span> ",
       "on": "<U+F074> "
     },
     "repeat-icons": {
