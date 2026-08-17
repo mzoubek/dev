@@ -2,7 +2,7 @@
 
 set -e
 
-echo "🚀 Starting Arch Dev Setup..."
+echo "=== Starting Arch Dev Setup ==="
 
 bash scripts/install-packages.sh
 bash scripts/clone-repos.sh

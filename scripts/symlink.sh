@@ -2,35 +2,22 @@
 
 set -e
 
-DOTFILES_DIR="$HOME/dev/dotfiles"
-TARGET_DIR="$HOME"
+DOTFILES_DIR="$HOME/dev/dotfiles/"
+TARGET_DIR="$HOME/.config/"
 
-echo "Creating symlink..."
+echo "=== Creating symlinks ==="
 
-# Top-level dotfiles
-for file in "$DOTFILES_DIR"/.*; do
-    [ -f "$file" ] || continue
-    filename=$(basename "$file")
+echo $TARGET_DIR
+for dir in "$DOTFILES_DIR"*/; do # List directories
+    dir=${dir%*/}                # Remove the trailing "/"
+    actual_dir=${dir##*/}
+    echo "$TARGET_DIR$actual_dir"
+    ln -s "$dir" "$TARGET_DIR$actual_dir"
 
-    # Skip unwanted files
-    [[ "$filename" == "." || "$filename" == ".." || "$filename" == ".git" ]] && continue
-
-    ln -sf "$file" "$TARGET_DIR/$filename"
-    echo "✓ Symlinked $filename"
+    echo "✓ Symlinked $actual_dir"
 done
 
-# Nested dotfiles
-if [ -d "$DOTFILES_DIR/.config" ]; then
-	find "$DOTFILES_DIR/.config" -type f ! -path "*/.git/*" ! -path "*/nvim/*" | while read -r src; do
-        rel_path="${src#$DOTFILES_DIR/}"
-        dest="$TARGET_DIR/$rel_path"
-
-        mkdir -p "$(dirname "$dest")"
-        ln -sf "$src" "$dest"
-        echo "✓ Symlinked $rel_path"
-    done
-fi
-
+echo "=== Enabling Bluetooth service ==="
 sudo systemctl enable bluetooth.service
 
-echo "✅ All symlinks created!"
+echo "All symlinks created...✔"

@@ -2,22 +2,22 @@
 
 set -e
 
-echo "🔧 Installing Pacman packages..."
+echo "=== Installing Pacman packages ==="
 xargs -a "$(dirname "$0")/../packages/pacman.txt" sudo pacman -S --noconfirm --needed
 
 # Install paru
 if ! command -v paru &>/dev/null; then
-	echo "📦 Installing paru AUR helper..."
-	mkdir -p "$HOME/build"
-	cd "$HOME/build"
-	git clone https://aur.archlinux.org/paru.git
-	cd paru
-	makepkg -si --noconfirm
+    echo "Installing paru AUR helper..."
+    mkdir -p "$HOME/build"
+    cd "$HOME/build"
+    git clone https://aur.archlinux.org/paru.git
+    cd paru
+    makepkg -si --noconfirm
 
-	echo "✅ paru installed!"
+    echo "paru AUR helper installed...✔"
 fi
 
-echo "🔧 Installing AUR packages with paru..."
+echo "Installing AUR packages with paru..."
 xargs -a "$(dirname "$0")/../packages/aur.txt" paru -S --noconfirm --needed --skipreview
 
-echo "✅ All packages installed!"
+echo "All packages installed...✔"
