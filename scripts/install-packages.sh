@@ -8,11 +8,13 @@ xargs -a "$(dirname "$0")/../packages/pacman.txt" sudo pacman -S --noconfirm --n
 # Install paru
 if ! command -v paru &>/dev/null; then
     echo "Installing paru AUR helper..."
-    mkdir -p "$HOME/build"
-    cd "$HOME/build"
-    git clone https://aur.archlinux.org/paru.git
-    cd paru
-    makepkg -si --noconfirm
+    (
+        mkdir -p "$HOME/build"
+        cd "$HOME/build"
+        git clone https://aur.archlinux.org/paru.git
+        cd paru
+        makepkg -si --noconfirm
+    )
 
     echo "paru AUR helper installed...✔"
 fi
